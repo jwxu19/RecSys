@@ -220,7 +220,7 @@ def iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls):
     name=re.search(regex,str(algo))
     algo_name.append(name.group())
     
-  return cv_rmse, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name
+  return cv_rmse, cv_personalization, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name
 
 def main():
   
@@ -238,18 +238,18 @@ def main():
   top_n=10
   threshold=4
   k_ls=[3,5,7,10]
-  cv_rmse, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name = iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls)
-  ls_name=["cv_rmse", "cv_precision", "cv_recall", "cv_fit_time", "cv_pred_time", "algo_name"]
+  cv_rmse, cv_personalization, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name = iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls)
+  ls_name=["cv_rmse", "cv_personalization", "cv_precision", "cv_recall", "cv_fit_time", "cv_pred_time", "algo_name"]
   
 
-  output=ls_name, cv_rmse, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name
+  output=ls_name, cv_rmse, cv_personalization, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name
   
 
   
   with open("metrics.pkl","wb") as f:
     pickle.dump(output, f)
   
-  return cv_rmse, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name
+  return cv_rmse, cv_personalization, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name
 
 if __name__ == "__main__":
     main()
