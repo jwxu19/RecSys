@@ -10,7 +10,7 @@ def load_metrics():
   return data
 
 def make_df(data):
-  ls_name, cv_rmse, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name=data
+  ls_name, cv_rmse, cv_personalization, cv_precision, cv_recall, cv_fit_time, cv_pred_time, algo_name=data
   
   precision=[]
   for i in cv_precision:
@@ -28,8 +28,9 @@ def make_df(data):
   rmse=[np.mean(i) for i in cv_rmse]
   fit_time=[np.mean(i) for i in cv_fit_time]
   pred_time=[np.mean(i) for i in cv_pred_time]
+  personalization=[np.mean(i) for i in cv_personalization]
 
-  df=pd.DataFrame([rmse,fit_time,pred_time], index=["rmse", "fit_time", "test_time"], columns=algo_name)
+  df=pd.DataFrame([rmse,personalization, fit_time,pred_time], index=["rmse", "fit_time", "test_time"], columns=algo_name)
   
   return df_precision, df_recall, df
 
@@ -53,7 +54,7 @@ def show_table(df_precision, df_recall, df):
   print(df_precision)
   print("Recall")
   print(df_recall)
-  print("Rmse, Fit Time, Test Time")
+  print("Rmse,Personalization, Fit Time, Test Time")
   print(df)
   
 
