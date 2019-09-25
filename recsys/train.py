@@ -18,20 +18,14 @@ METRICS_FILE = join(DATA_DIR, "metrics.pkl")
 OUTPUT_FILE = join(DATA_DIR, "best_model_predictions.pkl")
 
 
-def load_filtered_data(file=PKL_FILE):
+def load_data(file):
     f = open(file, "rb")
     data = pickle.load(f)
     f.close()
     return data
 
 
-def save_metrics(metrics, file=METRICS_FILE):
-    f = open(file, "wb")
-    pickle.dump(metrics, f)
-    f.close()
-
-
-def save_output(output, file=OUTPUT_FILE):
+def save_output(output, file):
     f = open(file, "wb")
     pickle.dump(output, f)
     f.close()
@@ -129,7 +123,7 @@ def find_best_model(algo_dict, metrics, rank_by="rmse", k=10):
     elif rank_by == "recall":
         best_algo_name = list(df_recall.T.sort_values(
             by=k, ascending=False).index)[0]
-    return algo_dict[best_algo_name]
+    return best_algo_name
 
 
 def refit(data, best_algo):
@@ -144,23 +138,23 @@ def refit(data, best_algo):
 
 def main():
     set_seed()
-    data = load_filtered_data()
+    data = load_data(PKL_FILE)
     data = Dataset.load_from_df(data, reader=Reader(rating_scale=(1, 5)))
 
     kfold = 5
-#    algo_ls = (KNNWithMeans(), SVD())
+
     algo_ls = (KNNWithMeans(),
                SVD(), SVDpp(),
                SlopeOne(), CoClustering())
     top_n = 10
-    threshold = 4
+    threshold = 3.5
     k_ls = [3, 5, 7, 10]
     metrics = iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls)
     algo_dict = dict(zip(metrics["algo_name"], algo_ls))
-
-    output = refit(data, find_best_model(algo_dict, metrics))
-    save_output(output)
-    save_metrics(metrics)
+    best_algo_name = find_best_model(algo_dict, metrics)
+    output = refit(data, algo_dict[best_algo_name])
+    save_output(output, OUTPUT_FILE)
+    save_output(metrics, METRICS_FILE)
     show_results(metrics)
 
 
