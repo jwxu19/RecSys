@@ -17,6 +17,22 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 def get_top_n(predictions, n):
+    """find n items with top estimated rating for each userid.
+
+    Parameters
+    ----------
+    predictions : list
+        userid, itemid, true rating, estimates, details
+    n : int
+        # of recommended items.
+
+    Returns
+    -------
+    type: dict
+        keys: user_id
+        items: turple of itemid and estimated rating (iid, est).
+
+    """
     # First map the predictions to each user.
     top_n = defaultdict(list)
     for uid, iid, true_r, est, _ in predictions:
@@ -31,6 +47,22 @@ def get_top_n(predictions, n):
 
 
 def personalization(prediction, n):
+    """dissimilarity across all user recommendation .
+
+    Parameters
+    ----------
+    prediction : list
+        userid, itemid, true rating, estimates, details
+    n : int
+        # of recommended items.
+
+
+    Returns
+    -------
+    type: float
+        personalization score.
+
+    """
     # prediction
     # n top n recommendation
 
@@ -78,6 +110,23 @@ def personalization(prediction, n):
 
 
 def precision_recall_at_k(predictions, k, threshold):
+    """precision and recall at k metrics for each user.
+
+    Parameters
+    ----------
+    prediction : list
+        userid, itemid, true rating, estimates, details
+    k : int
+        # of recommended items.
+    threshold : float
+        rating threshold used to determine relevant and irrelevant item.
+
+    Returns
+    -------
+    type: turple of float
+        precision, recall
+
+    """
     # First map the predictions to each user.
     user_est_true = defaultdict(list)
     for uid, _, true_r, est, _ in predictions:
