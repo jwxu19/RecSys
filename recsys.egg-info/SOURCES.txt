@@ -1,3 +1,5 @@
+README.md
+setup.py
 recsys/__init__.py
 recsys/evaluate.py
 recsys/inference.py

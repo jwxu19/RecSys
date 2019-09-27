@@ -152,6 +152,7 @@ def main():
     metrics = iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls)
     algo_dict = dict(zip(metrics["algo_name"], algo_ls))
     best_algo_name = find_best_model(algo_dict, metrics)
+    set_seed()
     output = refit(data, algo_dict[best_algo_name])
     save_output(output, OUTPUT_FILE)
     save_output(metrics, METRICS_FILE)
