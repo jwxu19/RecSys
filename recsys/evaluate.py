@@ -106,19 +106,20 @@ def precision_recall_at_k(predictions, k, threshold):
 
 
 def metrics_dataframe(metrics):
-    """Short summary.
+    """Convert metrics dictionary into three groups of pandas dataframe.
 
     Parameters
     ----------
     metrics : dict
-        Description of parameter `metrics`.
-        dictionary of 5-fold cv metrics including rmse, precision, recall,
-        fit time, prediction time, personalization, algorithm name
+        keys: rmse, precision, recall, fit time, prediction time,
+                personalization, algorithm name
+        items: list of 5 fold cross validation measurement
 
     Returns
     -------
     type
-        pandas dataframe of average cv metrics
+        list of pandas dataframe
+            df_precision, df_recall, df_general_metrics
 
     """
     general_metrics = {}

@@ -1,5 +1,6 @@
 """
-usage example
+Compute predicted score for defined user-item and recommend items for defined user.
+usage example:
 
 python inference.py --input_uid "A3R27T4HADWFFJ" --input_iid "0005019281" --input_rec_uid "A3R27T4HADWFFJ" --input_n 5
 

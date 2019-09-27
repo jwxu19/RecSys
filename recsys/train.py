@@ -1,4 +1,11 @@
-#!/usr/bin/env python3
+"""
+Train and Select models with best performance.
+
+Current model: KNNWithMeans, SVD, SVDpp, SlopeOne, CoClustering
+Metrics: RMSE, Precision, Recall, Fit Time, Test time
+
+"""
+
 from surprise import KNNWithMeans, SVD, SVDpp, SlopeOne, CoClustering
 from surprise import Reader, Dataset, accuracy, model_selection
 import random
@@ -38,6 +45,31 @@ def set_seed():
 
 
 def iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls):
+    """iterate different algortihms and compute their metrics.
+
+    Parameters
+    ----------
+    algo_ls : list
+        list of algorithm functions.
+    kfold : int
+        kfold cross validation.
+    data : surprise.Dataset.DatasetAutoFolds
+    top_n : int
+        # of top item recommended.
+    threshold : float
+        rating threshold used to determine relevant and irrelevant item.
+    k_ls : list
+        list of different # of top items recommended,
+        used in precision and recall at k.
+
+    Returns
+    -------
+    type: dict
+        keys: rmse, precision, recall, fit time, prediction time,
+                personalization, algorithm name.
+        items: list of 5 fold cross validation measurement.
+
+    """
 
     kf = model_selection.KFold(n_splits=kfold)
 
@@ -108,6 +140,29 @@ def iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls):
 
 
 def find_best_model(algo_dict, metrics, rank_by="rmse", k=10):
+    """find best model by selected metrics.
+
+    Parameters
+    ----------
+    algo_dict : dict
+        keys: algorithm name
+        items: algortihm function.
+    metrics : dict
+        keys: rmse, precision, recall, fit time, prediction time,
+                        personalization, algorithm name.
+        items: list of 5 fold cross validation measurement.
+    rank_by : str
+        name of metrics: rmse(default),
+        fit_time, pred_time, persoanliaation, precision, recall
+    k : int
+        # of recommended items.
+
+    Returns
+    -------
+    type: str
+        name of the best algorithm.
+
+    """
     df_precision, df_recall, df_general_metrics = metrics_dataframe(
         metrics)
 
@@ -127,6 +182,20 @@ def find_best_model(algo_dict, metrics, rank_by="rmse", k=10):
 
 
 def refit(data, best_algo):
+    """refit the best algorithm with whoel dataset.
+
+    Parameters
+    ----------
+    data : surprise.Dataset.DatasetAutoFolds
+    best_algo : surprise.prediction_algorithms
+        avilable algorithms from suprise.prediction_algorithms package.
+
+    Returns
+    -------
+    type: dict
+        keys: predictions, algo
+        items: list of predictions [userid, itemid, estimates], trained model
+    """
     # fit algorithm to the whole dataset
     trainset = data.build_full_trainset()
     best_algo.fit(trainset)
