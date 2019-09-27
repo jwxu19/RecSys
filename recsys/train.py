@@ -4,6 +4,12 @@ Train and Select models with best performance.
 Current model: KNNWithMeans, SVD, SVDpp, SlopeOne, CoClustering
 Metrics: RMSE, Precision, Recall, Fit Time, Test time
 
+load_data
+save_output
+set_seed
+iterate_algo
+find_best_model
+refit
 """
 
 from surprise import KNNWithMeans, SVD, SVDpp, SlopeOne, CoClustering
@@ -59,7 +65,7 @@ def iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls):
     threshold : float
         rating threshold used to determine relevant and irrelevant item.
     k_ls : list
-        list of different # of top items recommended,
+        list of different # of top items recommended,find_best_model
         used in precision and recall at k.
 
     Returns

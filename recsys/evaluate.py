@@ -1,4 +1,14 @@
-#!/usr/bin/env python3
+"""
+self defined metrics for model evaluation.
+
+get_top_n
+personalization
+precision_recall_at_k
+metrics_dataframe
+plot_precision_recall_k
+show_results
+"""
+
 from collections import defaultdict
 import numpy as np
 import pandas as pd
@@ -7,7 +17,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 def get_top_n(predictions, n):
-
     # First map the predictions to each user.
     top_n = defaultdict(list)
     for uid, iid, true_r, est, _ in predictions:
