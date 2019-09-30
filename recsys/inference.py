@@ -9,18 +9,9 @@ import pickle
 import argparse
 from os.path import abspath, dirname, join
 
-from recsys import evaluate
+from recsys.evaluate import get_top_n
 
-
-from surprise import Reader
-from surprise import model_selection
-from surprise import accuracy
-from surprise import Dataset
-
-from surprise import KNNWithMeans
-from surprise import SVD, SVDpp
-from surprise import SlopeOne, CoClustering
-
+from surprise import SVDpp
 
 DATA_DIR = join(dirname(dirname(abspath((__file__)))), "data")
 OUTPUT_FILE = join(DATA_DIR, "best_model_predictions.pkl")
@@ -35,7 +26,7 @@ def load_output(file=OUTPUT_FILE):
 
 def rec_top_n_items(user_id, pred, n=10):
     rec_item_ls = {}
-    top_n = evaluate.get_top_n(pred, n)
+    top_n = get_top_n(pred, n)
     for uid, rating, in top_n.items():
         rec_item_ls[uid] = [iid for (iid, _) in rating]
     return rec_item_ls[user_id]
@@ -43,7 +34,6 @@ def rec_top_n_items(user_id, pred, n=10):
 
 def main():
     output = load_output()
-#    predictions, algo = output["predictions"], output["algo"]
     pred, algo = output["predictions"], output["algo"]
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_uid", type=str,
@@ -56,13 +46,16 @@ def main():
                         help="input # of recommended items")
 
     args = vars(parser.parse_args())
-    _, _, _, est, _ = algo.predict(args["input_uid"], args["input_iid"])
+    uid = args["input_uid"]
+    iid = args["input_iid"]
+    rec_uid = args["input_rec_uid"]
+    n = args["input_n"]
+    _, _, _, est, _ = algo.predict(uid, iid)
 
     rec_ls = rec_top_n_items(args["input_rec_uid"], pred, args["input_n"])
-    print("input user id: {}, item id: {}, estimated rating: {}".format(
-        args["input_uid"], args["input_iid"], est))
-    print("top {} recommended items for input user id {}: {}".format(
-        args["input_n"], args["input_rec_uid"], rec_ls))
+    uid = args["input_uid"]
+    print(f'input user id: {uid}, item id: {iid}, estimated rating: {est}')
+    print(f'top {n} recommended items for input user id {rec_uid}: {rec_ls}')
 
 
 if __name__ == "__main__":

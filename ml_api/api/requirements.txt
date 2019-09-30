@@ -1,0 +1,5 @@
+flask
+
+#local recsys package
+-e git+https://github.com/jwxu19/RecSys.git@e8c43bbf27881a08790c84bdf14c3c19eafdde7d#egg=recsys
+

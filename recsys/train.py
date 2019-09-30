@@ -200,7 +200,9 @@ def refit(data, best_algo):
     -------
     type: dict
         keys: predictions, algo
-        items: list of predictions [userid, itemid, estimates], trained model
+        items: list of predictions
+            [userid, itemid, true rating, estimates, details],
+        trained model
     """
     # fit algorithm to the whole dataset
     trainset = data.build_full_trainset()
