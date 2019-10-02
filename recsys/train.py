@@ -26,7 +26,7 @@ from recsys.evaluate import (
 
 
 DATA_DIR = join(dirname(dirname(abspath((__file__)))), "data")
-PKL_FILE = join(DATA_DIR, "data_after_filter.pkl")
+PKL_FILE = join(DATA_DIR, "filtered_explicit_data.pkl")
 METRICS_FILE = join(DATA_DIR, "metrics.pkl")
 OUTPUT_FILE = join(DATA_DIR, "best_model_predictions.pkl")
 
@@ -145,7 +145,7 @@ def iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls):
     return metrics
 
 
-def find_best_model(algo_dict, metrics, rank_by="rmse", k=10):
+def find_best_model(algo_dict, metrics, rank_by="precision", k=10):
     """find best model by selected metrics.
 
     Parameters
@@ -180,10 +180,11 @@ def find_best_model(algo_dict, metrics, rank_by="rmse", k=10):
             by=rank_by, ascending=False).index)[0]
     elif rank_by == "precision":
         best_algo_name = list(df_precision.T.sort_values(
-            by=k, ascending=False).index)[0]
+            by="MAP", ascending=False).index)[0]
     elif rank_by == "recall":
         best_algo_name = list(df_recall.T.sort_values(
-            by=k, ascending=False).index)[0]
+            by="MAR", ascending=False).index)[0]
+    print(f"best algorithm {best_algo_name} rank by {rank_by}")
     return best_algo_name
 
 
@@ -216,7 +217,7 @@ def refit(data, best_algo):
 def main():
     set_seed()
     data = load_data(PKL_FILE)
-    data = Dataset.load_from_df(data, reader=Reader(rating_scale=(1, 5)))
+    data = Dataset.load_from_df(data, reader=Reader(rating_scale=(0, 1)))
 
     kfold = 5
 
@@ -224,7 +225,7 @@ def main():
                SVD(), SVDpp(),
                SlopeOne(), CoClustering())
     top_n = 10
-    threshold = 3.5
+    threshold = 0.7
     k_ls = [3, 5, 7, 10]
     metrics = iterate_algo(algo_ls, kfold, data, top_n, threshold, k_ls)
     algo_dict = dict(zip(metrics["algo_name"], algo_ls))

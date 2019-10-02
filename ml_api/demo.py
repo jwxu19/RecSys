@@ -5,7 +5,7 @@
 
 # import flask library and its underlying objects
 from flask import Flask, render_template, request
-from recsys.inference import load_output, rec_top_n_items
+from recsys.inference import load_output, rec_top_n_items, get_game_info
 import pandas as pd
 from random import sample
 
@@ -40,9 +40,17 @@ def index():
         num = int(data["n"])
         _, _, _, est, _ = algo.predict(uid, iid)
         rec_ls = rec_top_n_items(rec_uid, pred, num)
+        col = ['id', 'title', 'publisher', 'developer',
+               'price']
+        info_dict = {}
+        for i in col:
+            info_dict[i] = get_game_info(rec_ls, i)
+        df_info = pd.DataFrame(info_dict)
         return render_template('./index.html', uid=uid, iid=iid,
                                rec_uid=rec_uid, n=num,
                                est=est, rec_ls=rec_ls,
+                               tables=[df_info.to_html(classes="data")],
+                               titles=df_info.columns.values,
                                sample_uid=sample_uid, sample_iid=sample_iid)
     return render_template('./index.html',
                            sample_uid=sample_uid, sample_iid=sample_iid)

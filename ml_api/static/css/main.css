@@ -2,6 +2,7 @@ body {
   font: 20px Montserrat, sans-serif;
   line-height: 1.8;
   color: #f5f6f7;
+  text-align: center;
 }
 
 p {
@@ -10,6 +11,7 @@ p {
 
 ul {
   text-align: left;
+  font-size: 20px;
 }
 
 .margin {
@@ -29,7 +31,7 @@ ul {
 }
 
 .bg-3 {
-  background-color: #FFFFFF;
+  background-color: #90AFC5;
   /* White */
   color: #555555;
 }

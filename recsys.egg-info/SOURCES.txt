@@ -4,6 +4,9 @@ recsys/__init__.py
 recsys/evaluate.py
 recsys/inference.py
 recsys/preprocess.py
+recsys/steam_preprocess.py
+recsys/steamapi.py
+recsys/steamapi2.py
 recsys/train.py
 recsys.egg-info/PKG-INFO
 recsys.egg-info/SOURCES.txt
@@ -11,5 +14,6 @@ recsys.egg-info/dependency_links.txt
 recsys.egg-info/requires.txt
 recsys.egg-info/top_level.txt
 tests/__init__.py
+tests/test_evaluate.py
 tests/test_preprocess.py
 tests/test_train.py
