@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Recommendation System Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#sec1">Intro</a></li>
+          <li><a href="#sec3">Demo</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="https://github.com/jwxu19/RecSys/blob/master/README.md">Manual</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- First Container -->
+  <section id="sec1">
+    <div class="container-fluid bg-1 text-center">
+      <h3 class="margin">Recommendation Systems</h3>
+      <h3>Text about what recsys is</h3>
+      <br>
+      <br>
+      <br>
+      <p><a href="#sec2">Score Down</a></p>
+    </div>
+  </section>
+
+  <!-- Second Container -->
+  <section id="sec2">
+    <div class="container-fluid bg-2 text-center">
+      <h3 class="margin">Problem Statment</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      <h3 class="margin">Dataset Description</h3>
+      <p></p>
+      <h3 class="margin">Data Science Pipeline</h3>
+      <p></p>
+      <h3 class="margin">Results</h3>
+      <p></p>
+      <h3 class="margin">Future Work</h3>
+      <p></p>
+      <p><a href="dashboard.html">Analysis Dashboard</a></p>
+    </div>
+  </section>
+
+  <!-- Third Container (Grid) -->
+  <section id="sec3">
+    <div class="container-fluid bg-3 text-center">
+      <h1 class="margin">Demo</h1><br>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-style-5">
+            <form method="post" action="/">
+              <h1>Enter Information</h1>
+              <fieldset>
+                <legend><span class="number">1</span> Estimate Rating for UserID & ItemID</legend>
+                <input type="text" name="uid" placeholder="UserID *">
+                <input type="text" name="iid" placeholder="ItemID *">
+              </fieldset>
+              <fieldset>
+                <legend><span class="number">2</span> Recommend Items for UserID</legend>
+                <input type="text" name="recuid" placeholder="UserID *">
+                <input type="number" name="n" placeholder="# of Items *">
+              </fieldset>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-style-5">
+            <form>
+              <h1>Results Table</h1>
+              <fieldset>
+                <h2>Estimated results</h2>
+                <h3>UID {{uid}} and IID {{iid}}</h3>
+                <h3>{{est}}</h3>
+              </fieldset>
+              <fieldset>
+                <h2>Recommendation List for UID {{rec_uid}}</h2>
+                <ul>
+                  {% for i in rec_ls %}
+                  <li>{{i}}</li>
+                  {% endfor %}
+                </ul>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-style-5">
+            <form>
+              <h3>Sample UserID</h3>
+              <ul>
+                {% for uid in sample_uid %}
+                <li>{{uid}}</li>
+                {% endfor %}
+              </ul>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-style-5">
+            <form>
+              <h3>Sample ItemID</h3>
+              <ul>
+                {% for iid in sample_iid %}
+                <li>{{iid}}</li>
+                {% endfor %}
+              </ul>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="container-fluid bg-4 text-center">
+    <p><a href="https://github.com/jwxu19/RecSys/blob/master/README.md">Github Source Code</a></p>
+  </footer>
+
+</body>
+
+</html>
