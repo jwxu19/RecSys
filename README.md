@@ -107,13 +107,19 @@ python main.py
 Go to your browser
 
 http://127.0.0.1:8080/
+
 1. Recommender system: gain estimated rating and recommendation list
+
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/1.png"></image>
 
 http://127.0.0.1:8080/dashboard
+
 2. Analytics Dashboard: play around with games and users data with various widgets and graphs
+
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/2.png"></image>
+
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/3.png"></image>
+
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/4.png"></image> 
 
 
