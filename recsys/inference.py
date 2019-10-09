@@ -24,7 +24,7 @@ def load_output(file=OUTPUT_FILE):
     return output
 
 
-def rec_top_n_items(user_id, pred, n=10):
+def rec_top_n_items(user_id, pred, n=5):
     rec_item_ls = {}
     top_n = get_top_n(pred, n)
     for uid, rating, in top_n.items():
@@ -33,7 +33,7 @@ def rec_top_n_items(user_id, pred, n=10):
 
 
 def get_game_info(rec_item_ls, cols):
-    valid_col = ['id', 'title', 'publisher', 'developer', 'genres', 'url',
+    valid_col = ['id', 'app_name', 'publisher', 'developer', 'genres', 'url',
                  'tags', 'discount_price',
                  'reviews_url', 'specs', 'price', 'early_access']
     if cols not in valid_col:
@@ -66,11 +66,11 @@ def main():
     _, _, _, est, _ = algo.predict(uid, iid)
 
     rec_ls = rec_top_n_items(args["input_rec_uid"], pred, args["input_n"])
-    rec_name = get_game_info(rec_ls, "title")
+    rec_name = get_game_info(rec_ls, "app_name")
     uid = args["input_uid"]
     print(f'input user id: {uid}, item id: {iid}, estimated rating: {est}')
     print(f'top {n} recommended items for input user id {rec_uid}: {rec_ls}')
-    print(f'corresponding game title: {rec_name}')
+    print(f'corresponding app name: {rec_name}')
 
 
 if __name__ == "__main__":

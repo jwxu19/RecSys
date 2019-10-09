@@ -12,7 +12,7 @@ find_best_model
 refit
 """
 
-from surprise import KNNWithMeans, SVD, SVDpp, SlopeOne, CoClustering
+from surprise import KNNWithMeans, SVDpp, SlopeOne, CoClustering
 from surprise import Reader, Dataset, accuracy, model_selection
 import random
 import time
@@ -221,9 +221,8 @@ def main():
 
     kfold = 5
 
-    algo_ls = (KNNWithMeans(),
-               SVD(), SVDpp(),
-               SlopeOne(), CoClustering())
+    algo_ls = [KNNWithMeans(), SVDpp(),
+               SlopeOne(), CoClustering()]
     top_n = 10
     threshold = 0.7
     k_ls = [3, 5, 7, 10]
