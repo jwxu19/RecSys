@@ -1,12 +1,14 @@
 FROM python:3.6
 
-WORKDIR /steam_game_recommendation_systems
-COPY . /setam_game_recommendation_systems
 
+#ENV PATH="/steam_game_recommendation_systems:${PATH}"
+#WORKDIR /steam_game_recommendation_systems
+COPY . /
+COPY requirements.txt ./
 RUN apt-get update -y && \
     apt-get install -y python-pip python-dev
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
-CMD python main.py
+CMD ["python", "./main.py"]

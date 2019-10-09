@@ -327,4 +327,4 @@ def update_nb_rows_selected(selected_nb_reviews, selected_nb_recommend,
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, port=8080)
+    app.run_server(host="0.0.0.0",debug=True, port=8080)
