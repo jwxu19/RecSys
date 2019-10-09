@@ -138,13 +138,13 @@ Go to your browser
 
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/master/image/2.png"></image>
-<p align="center"><strong>x-axis: # of review/recommend for each game, y-axis: # of game</strong></p>
+
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/master/image/3.png"></image>
-<p align="center"><strong>x-axis: # of review/recommend for each user, y-axis: # of user<strong></p>
+<p align="center"><strong>x-axis: # of review/recommend for each game, y-axis: # of game</strong></p>
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/master/image/4.png"></image> 
-<p align="center"><strong>x-axis: percentage of review/recommend for each user, y-axis: # of user<strong></p>
+<p align="center"><strong>x-axis: number/percentage of review/recommend for each user, y-axis: # of user<strong></p>
 
 
 
