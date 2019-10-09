@@ -137,13 +137,13 @@ http://localhost:5000:8080/dashboard or http://127.0.0.1:8080/dashboard
 
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/2.png"></image>
-<p style="text-align: center;">**x-axis**: # of review/recommend for each game, **y-axis**: # of game</p>
+<p style="text-align: center;">x-axis: # of review/recommend for each game, y-axis: # of game</p>
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/3.png"></image>
-<p style="text-align: center;">**x-axis**: # of review/recommend for each user, **y-axis**: # of user</p>
+<p style="text-align: center;">x-axis: # of review/recommend for each user, y-axis: # of user</p>
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/4.png"></image> 
-<p style="text-align: center;">**x-axis**: percentage of review/recommend for each user, **y-axis**: # of user</p>
+<p style="text-align: center;">x-axis: percentage of review/recommend for each user, y-axis: # of user</p>
 
 
 
