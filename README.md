@@ -75,7 +75,7 @@ under virtual environment
 run main.py
 ```
 
-or with docker built
+or with docker image built
 ```
 docker run --rm -p 5000:8080 recdemo
 ```
