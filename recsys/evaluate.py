@@ -163,6 +163,27 @@ def precision_recall_at_k(predictions, k, threshold):
     return overall_precisions, overall_recalls
 
 
+def mean_average_precision_recall(precision, recall):
+    """MAP: Average precision across multiple k same for recall.
+    Parameters
+    ----------
+    precision, recall : list of dict
+        keys: k
+        items:precision at k, recall at k
+
+    Returns
+    -------
+    type
+        list of (list of dict)
+            precision with map, recall with mac
+    """
+    for precision_at_k in precision:
+        precision_at_k["MAP"] = np.mean(list(precision_at_k.values()))
+    for recall_at_k in recall:
+        recall_at_k["MAR"] = np.mean(list(recall_at_k.values()))
+    return precision, recall
+
+
 def metrics_dataframe(metrics):
     """Convert metrics dictionary into three groups of pandas dataframe.
 
@@ -196,7 +217,7 @@ def metrics_dataframe(metrics):
         precision.append({k: np.mean(v) for k, v in i.items()})
     for i in metrics["cv_recall"]:
         recall.append({k: np.mean(v) for k, v in i.items()})
-
+    precision, recall = mean_average_precision_recall(precision, recall)
     df_general_metrics = pd.DataFrame(general_metrics).set_index("algo_name")
     df_precision = pd.DataFrame(precision, index=metrics["algo_name"]).T
     df_recall = pd.DataFrame(recall, index=metrics["algo_name"]).T

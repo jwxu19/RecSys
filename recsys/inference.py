@@ -2,7 +2,7 @@
 Compute estimate for defined user-item, recommend items for defined user.
 usage example:
 
-python inference.py --input_uid "A3R27T4HADWFFJ" --input_iid "0005019281" --input_rec_uid "A3R27T4HADWFFJ" --input_n 5
+python inference.py --input_uid "76561198107703934" --input_iid "12210" --input_rec_uid "76561198067243010" --input_n 5
 
 """
 import pickle
@@ -10,11 +10,11 @@ import argparse
 from os.path import abspath, dirname, join
 
 from recsys.evaluate import get_top_n
-
-from surprise import SVDpp
+from surprise import SVDpp, SlopeOne
 
 DATA_DIR = join(dirname(dirname(abspath((__file__)))), "data")
 OUTPUT_FILE = join(DATA_DIR, "best_model_predictions.pkl")
+DETAIL_FILE = join(DATA_DIR, "details.pkl")
 
 
 def load_output(file=OUTPUT_FILE):
@@ -24,12 +24,25 @@ def load_output(file=OUTPUT_FILE):
     return output
 
 
-def rec_top_n_items(user_id, pred, n=10):
+def rec_top_n_items(user_id, pred, n=5):
     rec_item_ls = {}
     top_n = get_top_n(pred, n)
     for uid, rating, in top_n.items():
         rec_item_ls[uid] = [iid for (iid, _) in rating]
     return rec_item_ls[user_id]
+
+
+def get_game_info(rec_item_ls, cols):
+    valid_col = ['id', 'app_name', 'publisher', 'developer', 'genres', 'url',
+                 'tags', 'discount_price',
+                 'reviews_url', 'specs', 'price', 'early_access']
+    if cols not in valid_col:
+        print("check your spelling")
+    else:
+        df_game = load_output(DETAIL_FILE)
+        df_rec_game = df_game.loc[df_game["id"].isin(rec_item_ls)]
+        rec_info = list(df_rec_game[cols])
+        return rec_info
 
 
 def main():
@@ -53,9 +66,11 @@ def main():
     _, _, _, est, _ = algo.predict(uid, iid)
 
     rec_ls = rec_top_n_items(args["input_rec_uid"], pred, args["input_n"])
+    rec_name = get_game_info(rec_ls, "app_name")
     uid = args["input_uid"]
     print(f'input user id: {uid}, item id: {iid}, estimated rating: {est}')
     print(f'top {n} recommended items for input user id {rec_uid}: {rec_ls}')
+    print(f'corresponding app name: {rec_name}')
 
 
 if __name__ == "__main__":
