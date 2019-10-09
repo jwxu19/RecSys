@@ -19,7 +19,7 @@ The Steam Game Dataset comes from [Recommender System Datasets](cseweb.ucsd.edu/
 
 ## Install
 
-Docker
+**Docker**
 
 ```bash
 docker build -t recdemo .
@@ -27,7 +27,7 @@ docker run --rm -p 5000:8080 recdemo
 ```
 
 
-Local development
+**Local development**
 
 To isolate, create virtual environment for local development
 
@@ -84,7 +84,7 @@ iid = list(df_pred.iid.unique())
 ## Flask API
 
 
-with docker image built
+**with docker image built**
 ```
 docker run --rm -p 5000:8080 recdemo
 ```
@@ -105,7 +105,7 @@ Recommend top 5 games for userid
 curl -X POST -H 'content-type: application/json' --data '{"rec_uid":"76561198107703934"}' http://localhost:5000/rec
 ```
 
-under virtual environment 
+**under virtual environment**
 ```bash
 run main.py
 ```
@@ -137,13 +137,13 @@ http://localhost:5000:8080/dashboard or http://127.0.0.1:8080/dashboard
 
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/2.png"></image>
-Note: x-axis: # of review/recommend for each game, y-axis: # of game
+<p style="text-align: center;">**x-axis**: # of review/recommend for each game, **y-axis**: # of game</p>
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/3.png"></image>
-Note: x-axis: # of review/recommend for each user, y-axis: # of user
+<p style="text-align: center;">**x-axis**: # of review/recommend for each user, **y-axis**: # of user</p>
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/4.png"></image> 
-Note: x-axis: percentage of review/recommend for each user, y-axis: # of user
+<p style="text-align: center;">**x-axis**: percentage of review/recommend for each user, **y-axis**: # of user</p>
 
 
 
