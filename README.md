@@ -28,6 +28,7 @@ docker run --rm -p 5000:8080 recdemo
 
 
 Local development
+
 To isolate, create virtual environment for local development
 
 ```bash
@@ -68,14 +69,22 @@ top 5 recommended items for input user id 76561198067243010: ['34010', '204300',
 corresponding app name: ['Alpha Protocol™', 'The Sims™ 3', 'Life is Strange - Episode 1', 'Awesomenauts - the 2D moba', 'SPORE™']
 ```
 
-## Flask API
-
-under virtual environment 
-```bash
-run main.py
+To get other available userid and itemid, you can call function load_output from from recsys.inference
+```python
+from recsys.inference import load_output
+import pandas as pd
+output = load_output()
+pred = output["predictions"] #class  surprise.prediction_algorithms.preidction.Prediction
+df_pred = pd.DataFrame(pred)
+#get the full list of uid and iid
+uid = list(df_pred.uid.unique()) 
+iid = list(df_pred.iid.unique())
 ```
 
-or with docker image built
+## Flask API
+
+
+with docker image built
 ```
 docker run --rm -p 5000:8080 recdemo
 ```
@@ -83,44 +92,58 @@ docker run --rm -p 5000:8080 recdemo
 
 Start by checking if the api works
 ```bash
-curl -i http://127.0.0.1:8080/ping
+curl -i http://localhost:5000/ping
 ```
 
 Estimate rating
 ```bash
-curl -X POST -H 'content-type: application/json' --data '{"uid":"76561198107703934","iid":"12210"}' http://127.0.0.1:8080/predict
+curl -X POST -H 'content-type: application/json' --data '{"uid":"76561198107703934","iid":"12210"}' http://localhost:5000/predict
 ```
 
 Recommend top 5 games for userid
 ```bash
-curl -X POST -H 'content-type: application/json' --data '{"rec_uid":"76561198107703934"}' http://127.0.0.1:8080/rec
+curl -X POST -H 'content-type: application/json' --data '{"rec_uid":"76561198107703934"}' http://localhost:5000/rec
 ```
+
+under virtual environment 
+```bash
+run main.py
+```
+the same steps above, except you need to change your IP address to http://0.0.0.0:8000
 
 ## UI
 
 Web-based Interactive interface built by Flask and [Dash](https://dash.plot.ly/)((very powerful analytical web applications).
 
 ```bash
+docker run --rm -p 5000:8080 recdemo
+```
+```bash
 python main.py
 ```
 
+
 Go to your browser
 
-http://127.0.0.1:8080/
+http://localhost:5000:8080/ or http://127.0.0.1:8080/
 
 1. Recommender system: gain estimated rating and recommendation list
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/1.png"></image>
 
-http://127.0.0.1:8080/dashboard
+http://localhost:5000:8080/dashboard or http://127.0.0.1:8080/dashboard
 
 2. Analytics Dashboard: play around with games and users data with various widgets and graphs
 
+
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/2.png"></image>
+Note: x-axis: # of review/recommend for each game, y-axis: # of game
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/3.png"></image>
+Note: x-axis: # of review/recommend for each user, y-axis: # of user
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/4.png"></image> 
+Note: x-axis: percentage of review/recommend for each user, y-axis: # of user
 
 
 
