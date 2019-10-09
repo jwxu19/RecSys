@@ -125,15 +125,16 @@ python main.py
 
 Go to your browser
 
-http://localhost:5000:8080/ or http://127.0.0.1:8080/
 
-1. Recommender system: gain estimated rating and recommendation list
+1. Recommender system: gain estimated rating and recommendation list 
+   http://localhost:5000:8080/ or http://127.0.0.1:8080/
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/master/image/1.png"></image>
 
-http://localhost:5000:8080/dashboard or http://127.0.0.1:8080/dashboard
 
-2. Analytics Dashboard: play around with games and users data with various widgets and graphs
+
+2. Analytics Dashboard: play around with games and users data with various widgets and graphs 
+   http://localhost:5000:8080/dashboard or http://127.0.0.1:8080/dashboard
 
 
 <image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/master/image/2.png"></image>
