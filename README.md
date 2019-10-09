@@ -19,7 +19,7 @@ The Steam Game Dataset comes from [Recommender System Datasets](cseweb.ucsd.edu/
 
 ## Install
 
-###docker
+Docker
 
 ```bash
 docker build -t recdemo .
@@ -27,7 +27,7 @@ docker run --rm -p 5000:8080 recdemo
 ```
 
 
-###local development
+Local development
 To isolate, create virtual environment for local development
 
 ```bash
@@ -108,13 +108,13 @@ Go to your browser
 
 http://127.0.0.1:8080/
 1. Recommender system: gain estimated rating and recommendation list
-<image src="https://github.com/jwxu19/steam_game_recommendation_systems/image/1.png"></image>
+<image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/1.png"></image>
 
 http://127.0.0.1:8080/dashboard
 2. Analytics Dashboard: play around with games and users data with various widgets and graphs
-<image src="https://github.com/jwxu19/steam_game_recommendation_systems/image/2.png"></image>
-<image src="https://github.com/jwxu19/steam_game_recommendation_systems/image/3.png"></image>
-<image src="https://github.com/jwxu19/steam_game_recommendation_systems/image/4.png"></image> 
+<image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/1.png"></image>
+<image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/1.png"></image>
+<image src="https://github.com/jwxu19/steam_game_recommendation_systems/blob/refactor_steam/image/1.png"></image> 
 
 
 
